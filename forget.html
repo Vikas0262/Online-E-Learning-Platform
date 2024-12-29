@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="payment.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #73B5BD; /* Match Payment page background */
+        }
+
+        .forgot-container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .forgot-container h1 {
+            font-size: 20px; /* Match Payment page title font size */
+            color: #5e8f94; /* Match Payment page title color */
+            margin-bottom: 20px;
+        }
+
+        .forgot-container p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .forgot-container input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px; /* Match input style from Payment page */
+        }
+
+        .forgot-container input:focus {
+            border: 1px solid #000;
+        }
+
+        .forgot-container button {
+            width: 100%;
+            padding: 12px;
+            font-size: 17px; /* Match Payment page button font size */
+            background: #5e8f94; /* Match Payment page button background */
+            color: #fff;
+            margin-top: 5px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            transition: background 0.2s linear;
+        }
+
+        .forgot-container button:hover {
+            background: #73B5BD; /* Match hover style from Payment page */
+        }
+
+        .forgot-container a {
+            display: block;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #5e8f94; /* Match link color with Payment page theme */
+            text-decoration: none;
+        }
+
+        .forgot-container a:hover {
+            text-decoration: underline;
+        }
+
+        #password-display {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="forgot-container">
+        <h1>Forgot Password</h1>
+        <p>Enter your email below to reset your password.</p>
+        <form id="forget-form">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit">Reset Password</button>
+        </form>
+        <p id="password-display"></p>
+        <a href="login_signup.html">Back to Login</a>
+    </div>
+</body>
+
+<script>
+    const form = document.getElementById('forget-form');
+    const passwordDisplay = document.getElementById('password-display');
+
+    function getUsers() {
+        return JSON.parse(localStorage.getItem('users')) || [];
+    }
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const users = getUsers();
+        const user = users.find(user => user.email === email);
+
+        if (user) {
+            passwordDisplay.textContent = `Your password is: ${user.password}`;
+            passwordDisplay.style.color = 'green';
+        } else {
+            passwordDisplay.textContent = 'Email not found!';
+            passwordDisplay.style.color = 'red';
+        }
+    });
+</script>
+
+</html>
