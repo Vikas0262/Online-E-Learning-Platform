@@ -19,11 +19,11 @@
         <div class="nav__logo"><a href="#">Learning World</a></div>
         <ul class="nav__links">
             <li class="link"><a href="index.html">Home</a></li>
-            <li class="link"><a href="#">About Us</a></li>
-            <li class="link"><a href="#">Services</a></li>
-            <li class="link"><a href="#">Courses</a></li>
+            <li class="link"><a href="about.html">About Us</a></li>
+            <li class="link"><a href="service.html">Services</a></li>
+            <li class="link"><a href="course.html">Courses</a></li>
             <li class="link"><a href="blog.html">Blog</a></li>
-            <li class="link"><a href="#" class="nav__btn">Register</a></li>
+            <li class="link"><a href="login_signup.html" class="nav__btn">Register</a></li>
         </ul>
     </nav>
 
@@ -39,28 +39,23 @@
                 <div class="card">
                     <img src="images/picture/card-1.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <!-- <h5 class="card-title">C++ From Basic To advance</h5> -->
                         <h5 class="card-title">C++ From Basic To Advance</h5>
-                        <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Getting started with CPP</p>
-                        <div class="pay flex">
-                            <a class="nav-link nav-btn"
-                                href="https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ">Enroll</a>
-                            <button>Pay</button>
-                        </div>
-                        <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
+                        <!-- Price and Buttons -->
+                        <p id="price-1">Price: <strong>Rs. 3000</strong></p>
+                        <a id="pay-btn-1" class="buy-btn" href="payment.html" onclick="handlePaymentRedirect(event, 1)">Pay</a>
+                        <button id="enroll-btn-1" class="nav-btn" disabled>Enroll</button>
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between">
                             <div class="date d-flex">
                                 <img src="images/icon/calendar.png" alt="">
-
+                                <!--<h6>Start 20  April, 2021</h6>-->
                             </div>
                             <div class="date d-flex">
                                 <img src="images/icon/people.png" alt="">
                                 <!-- <h6>Avilable</h6> -->
                                 <h6>Available</h6>
-
                             </div>
                         </div>
                     </div>
@@ -68,11 +63,12 @@
                 <div class="card">
                     <img src="images/picture/card-2.png" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">JAVA</h5>
-                        <!-- <p class="card-text">Kickstart your journey in java</p> -->
-                        <p class="card-text">Kickstart your journey in Java</p>
-                        <a class="nav-link nav-btn"
-                            href="https://www.youtube.com/watch?v=WOUpjal8ee4&list=PLsyeobzWxl7oZ-fxDYkOToURHhMuWD1BK">Enroll</a>
+                        <h5 class="card-title">C++ From Basic To Advance</h5>
+                        <p class="card-text">Getting started with CPP</p>
+                        <!-- Price and Buttons -->
+                        <p id="price-1">Price: <strong>Rs. 8000</strong></p>
+                        <a id="pay-btn-1" class="buy-btn" href="payment.html" onclick="handlePaymentRedirect(event, 1)">Pay</a>
+                        <button id="enroll-btn-1" class="nav-btn" disabled>Enroll</button>
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between">
@@ -94,6 +90,7 @@
                         <h5 class="card-title">C Programming</h5>
                         <!-- <p class="card-text">Kickstart you coding journey</p> -->
                         <p class="card-text">Kickstart you coding journey with C</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=MoqYPc43ssk&list=PLXthElPLs7ZaGXGI-_ToQ670nr1RAtjRB">Enroll</a>
                     </div>
@@ -125,7 +122,10 @@
                         <h5 class="card-title">Python Programming</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Getting started with Python</p>
-                        <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=kqtD5dpn9C8">Enroll</a>
+                        <p id="price-1">Price: <strong>Rs. 8000</strong></p>
+                        <a id="pay-btn-1" class="buy-btn" href="payment.html" onclick="handlePaymentRedirect(event, 1)">Pay</a>
+                        <button id="enroll-btn-1" class="nav-btn" disabled>Enroll</button>
+                        <!-- <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=kqtD5dpn9C8">Enroll</a> -->
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
                     </div>
                     <div class="card-footer">
@@ -151,6 +151,7 @@
                         <h5 class="card-title">Django Framework</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Master Django Skills</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p">Enroll</a>
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
@@ -178,6 +179,7 @@
                         <h5 class="card-title">Html</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Learn HTML to create amazing web pages</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=dD2EISBDjWM&list=PLr6-GrHUlVf_ZNmuQSXdS197Oyr1L9sPB">Enroll</a>
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
@@ -211,6 +213,7 @@
                         <h5 class="card-title">CSS</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Design Amazing Web Pages with CSS</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=qKoajPPWpmo&list=PLr6-GrHUlVf8JIgLcu3sHigvQjTw_aC9C">Enroll</a>
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
@@ -238,6 +241,7 @@
                         <h5 class="card-title">Javascript</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Kickstart you coding journey in Scripting</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=2md4HQNRqJA&list=PLRAV69dS1uWSxUIk5o3vQY2-_VKsOpXLD">Enroll</a>
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
@@ -265,8 +269,11 @@
                         <h5 class="card-title">React JS</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Learn Amazing Front-end Framework</p>
-                        <a class="nav-link nav-btn"
-                            href="https://www.youtube.com/watch?v=QFaFIcGhPoM&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3">Enroll</a>
+                        <p id="price-1">Price: <strong>Rs. 12000</strong></p>
+                        <a id="pay-btn-1" class="buy-btn" href="payment.html" onclick="handlePaymentRedirect(event, 1)">Pay</a>
+                        <button id="enroll-btn-1" class="nav-btn" disabled>Enroll</button>
+                        <!-- <a class="nav-link nav-btn"
+                            href="https://www.youtube.com/watch?v=QFaFIcGhPoM&list=PLC3y8-rFHvwgg3vaYJgHGnModB54rxOk3">Enroll</a> -->
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
                     </div>
                     <div class="card-footer">
@@ -301,6 +308,7 @@
                         <h5 class="card-title">Kotlin</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Kickstart you coding journey in Kotlin</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=VEqhzCFmEQI&list=PLlxmoA0rQ-LwgK1JsnMsakYNACYGa1cjR">Enroll</a>
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
@@ -328,6 +336,7 @@
                         <h5 class="card-title">Angular</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Head for Google's Framework</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=0eWrpsCLMJQ&list=PLC3y8-rFHvwhBRAgFinJR8KHIrCdTkZcZ">Enroll</a>
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
@@ -356,6 +365,7 @@
                         <h5 class="card-title">SQL</h5>
                         <!-- <p class="card-text">Geeting started with CPP</p> -->
                         <p class="card-text">Start Understanding Databases</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=7GVFYt6_ZFM&list=PL08903FB7ACA1C2FB">Enroll</a>
                         <!--<button class="buy-btn" herf "https://www.youtube.com/watch?v=z9bZufPHFLU&list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ"></button>Enroll</button> -->
@@ -394,7 +404,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Flutter</h5>
                         <p class="card-text">Kickstart you coding journey in Flutter</p>
-                        <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=VPvVD8t02U8">Enroll</a>
+                        <p id="price-1">Price: <strong>Rs. 6000</strong></p>
+                        <a id="pay-btn-1" class="buy-btn" href="payment.html" onclick="handlePaymentRedirect(event, 1)">Pay</a>
+                        <button id="enroll-btn-1" class="nav-btn" disabled>Enroll</button>
+                        <!-- <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=VPvVD8t02U8">Enroll</a> -->
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between">
@@ -416,6 +429,7 @@
                     <div class="card-body">
                         <h5 class="card-title">PyTorch</h5>
                         <p class="card-text">Explore Machine Learning with PyTorch</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=V_xro1bcAuA">Enroll</a>
                     </div>
                     <div class="card-footer">
@@ -438,6 +452,7 @@
                     <div class="card-body">
                         <h5 class="card-title">PHP</h5>
                         <p class="card-text">Create Dynamic Websites with PHP</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn"
                             href="https://www.youtube.com/watch?v=7GVFYt6_ZFM&list=PL08903FB7ACA1C2FB">Enroll</a>
                     </div>
@@ -469,7 +484,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Nest.Js</h5>
                         <p class="card-text">Create a REST API</p>
-                        <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=GHTA143_b-s">Enroll</a>
+                        <p id="price-1">Price: <strong>Rs. 10000</strong></p>
+                        <a id="pay-btn-1" class="buy-btn" href="payment.html" onclick="handlePaymentRedirect(event, 1)">Pay</a>
+                        <button id="enroll-btn-1" class="nav-btn" disabled>Enroll</button>
+                        <!-- <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=GHTA143_b-s">Enroll</a> -->
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between">
@@ -491,6 +509,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Tailwind CSS</h5>
                         <p class="card-text">Responsive Web Designs with Tailwind CSS</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=lZp4salRFFc">Enroll</a>
                     </div>
                     <div class="card-footer">
@@ -514,6 +533,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Bootstrap</h5>
                         <p class="card-text">Create Interactive Websites with Bootstrap</p>
+                        <p id="price-1"><strong>Free</strong></p>
                         <a class="nav-link nav-btn" href="https://www.youtube.com/watch?v=-qfEOE4vtxE">Enroll</a>
                     </div>
                     <div class="card-footer">
