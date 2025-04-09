@@ -1,100 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="payment.css">
+    <title>Payment - Learning World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        /* Navbar Styles */
+        .navbar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #1e293b;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-menu a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: #4f46e5;
+        }
+
+        :root {
+            --primary-color: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary-color: #1e293b;
+            --accent-color: #f43f5e;
+            --text-color: #1e293b;
+            --light-bg: #f8fafc;
+            --border-color: #131a24;
+            --success-color: #10b981;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            padding-top: 80px; /* Add padding for fixed navbar */
+        }
+
+        .payment-container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .payment-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .payment-header {
+            background: white;
+            padding-inline: 2rem;
+            padding-block: 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .payment-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .payment-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .payment-content {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .course-info {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+        }
+
+        .total-amount {
+            text-align: right;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            padding: 1.25rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+            box-shadow: var(--card-shadow);
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.1);
+        }
+
+        .payment-method.active {
+            border-color: var(--primary-color);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        .payment-method i {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .payment-method:hover i {
+            transform: scale(1.1);
+        }
+
+        .payment-method .method-name {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .payment-method .method-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .payment-form {
+            display: none;
+        }
+
+        .payment-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--secondary-color);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .card-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .pay-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+        }
+
+        .secure-payment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #64748b;
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .secure-payment i {
+            color: var(--success-color);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: none;
+            }
+
+            .mobile-menu.active {
+                display: block;
+            }
+
+            body {
+                padding-top: 70px;
+            }
+
+            .payment-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .payment-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .total-amount {
+                font-size: 2rem;
+            }
+
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Learning World</a>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Admin Login</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Admin Login</a></li>
+            </ul>
+        </div>
+    </nav>
 
-        <form action="#">
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>Course Payment</h1>
+            <p>Complete your payment to start learning</p>
+        </div>
 
-            <div class="row">
-
-
-                <div class="col">
-                    <h3 class="title">Payment</h3>
-
-                    <div class="inputBox">
-                        <label for="name">Card Accepted:</label>
-                        <img src="https://i.ibb.co/X38b5PF/card-img.png" alt="">
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="cardName">Name On Card:</label>
-                        <input type="text" id="cardName" placeholder="Enter card name" required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="cardNum">Debit/Credit Card Number:</label>
-                        <input type="text" id="cardNum" placeholder="1111-2222-3333-4444" maxlength="19" required>
-                    </div>
-
-                    <div class="inputBox">
-                        <label for="">Exp Month:</label>
-                        <select name="" id="">
-                            <option value="">Choose month</option>
-                            <option value="January">January</option>
-                            <option value="February">February</option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="July">July</option>
-                            <option value="August">August</option>
-                            <option value="September">September</option>
-                            <option value="October">October</option>
-                            <option value="November">November</option>
-                            <option value="December">December</option>
-                        </select>
-                    </div>
-
-
-                    <div class="flex">
-                        <div class="inputBox">
-                            <label for="">Exp Year:</label>
-                            <select name="" id="">
-                                <option value="">Choose Year</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
-                            </select>
-                        </div>
-
-                        <div class="inputBox">
-                            <label for="cvv">CVV</label>
-                            <input type="number" id="cvv" placeholder="1234" required>
-                        </div>
-                    </div>
-
+        <div class="payment-content">
+            <div class="course-info">
+                <div class="info-item">
+                    <span class="info-label">Course</span>
+                    <span class="info-value">Mastering JavaScript</span>
                 </div>
-
+                <div class="info-item">
+                    <span class="info-label">Instructor</span>
+                    <span class="info-value">John Doe</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Duration</span>
+                    <span class="info-value">8 weeks</span>
+                </div>
+                <div class="total-amount"></div>
             </div>
 
-            <input type="submit" value="Proceed to Checkout" class="submit_btn">
-        </form>
+            <div class="payment-form-section">
+                <div class="payment-methods">
+                    <div class="payment-method active" data-method="card">
+                        <i class="fas fa-credit-card"></i>
+                        <div class="method-name">Credit Card</div>
+                        <div class="method-desc">Visa, Mastercard, Amex</div>
+                    </div>
+                    <div class="payment-method" data-method="card">
+                        <i class="fas fa-credit-card"></i>
+                        <div class="method-name">Debit Card</div>
+                        <div class="method-desc">Visa, Mastercard, RuPay</div>
+                    </div>
+                    <div class="payment-method" data-method="upi">
+                        <i class="fas fa-mobile-alt"></i>
+                        <div class="method-name">UPI</div>
+                        <div class="method-desc">Google Pay, PhonePe, Paytm</div>
+                    </div>
+                    </div>
 
+                <form id="cardForm" class="payment-form active">
+                    <div class="form-group">
+                        <label class="form-label">Card Number</label>
+                        <input type="text" class="form-input" placeholder="1234 5678 9012 3456" required>
+                    </div>
+
+                    <div class="card-input-group">
+                        <div class="form-group">
+                            <label class="form-label">Expiry Date</label>
+                            <input type="text" class="form-input" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CVV</label>
+                            <input type="text" class="form-input" placeholder="123" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Cardholder Name</label>
+                        <input type="text" class="form-input" placeholder="John Doe" required>
+                    </div>
+                </form>
+
+                <form id="upiForm" class="payment-form">
+                    <div class="form-group">
+                        <label class="form-label">UPI ID</label>
+                        <input type="text" class="form-input" placeholder="username@ybl" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" placeholder="Enter your full name" required>
+                    </div>
+                </form>
+
+                <button type="submit" class="pay-btn" onclick="window.location.href='videoplayer.html'">Pay $99.99</button>
+
+                <div class="secure-payment">
+                    <i class="fas fa-lock"></i>
+                    <span>Secure Payment</span>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
+
 <script>
-    let cardNumInput = document.querySelector('#cardNum')
+        // Navbar Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
 
-    cardNumInput.addEventListener('keyup', () => {
-        let cNumber = cardNumInput.value
-        cNumber = cNumber.replace(/\s/g, "")
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
 
-        if (Number(cNumber)) {
-            cNumber = cNumber.match(/.{1,4}/g)
-            cNumber = cNumber.join(" ")
-            cardNumInput.value = cNumber
-        }
-    })
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Payment method selection
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const cardForm = document.getElementById('cardForm');
+        const upiForm = document.getElementById('upiForm');
+
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+
+                if (method.dataset.method === 'upi') {
+                    cardForm.classList.remove('active');
+                    upiForm.classList.add('active');
+                } else {
+                    cardForm.classList.add('active');
+                    upiForm.classList.remove('active');
+                }
+            });
+        });
+
+        // Form submission
+        const paymentForm = document.querySelector('.payment-form.active');
+        paymentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Payment successful! Redirecting to course...');
+            window.location.href = 'course-details.html';
+        });
 </script>
-
+</body>
 </html>

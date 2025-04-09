@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Details - Learning World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary-color: #4299e1;
+            --secondary-color: #2d3748;
+            --accent-color: #e53e3e;
+            --text-color: #2d3748;
+            --light-bg: #f7fafc;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .course-details-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .course-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-preview {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .course-preview img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .course-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .course-title {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .course-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+        }
+
+        .course-price {
+            font-size: 2rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .enroll-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .enroll-btn:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        .course-description {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .description-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .course-curriculum {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .curriculum-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .curriculum-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lesson-title i {
+            color: var(--primary-color);
+        }
+
+        .lesson-duration {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .course-details-container {
+                padding: 1rem;
+            }
+
+            .course-header {
+                grid-template-columns: 1fr;
+            }
+
+            .course-preview img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="course-details-container">
+        <div class="course-header">
+            <div class="course-preview">
+                <img src="https://i.ytimg.com/vi/xc3a_CJhjCc/maxresdefault.jpg" alt="Course Preview">
+            </div>
+            <div class="course-info">
+                <h1 class="course-title">Mastering JavaScript</h1>
+                <div class="course-meta">
+                    <span class="meta-item">
+                        <i class="fas fa-user"></i>
+                        John Doe
+                    </span>
+                    <span class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        8 weeks
+                    </span>
+                </div>
+                <div class="course-price">$99.99</div>
+                <!-- <button class="enroll-btn">Enroll Now</button> -->
+                <input type="button" value="Enroll Now" class="enroll-btn" onclick="window.location.href='payment.html'">
+
+            </div>
+        </div>
+
+        <div class="course-description">
+            <h2 class="description-title">About This Course</h2>
+            <p>Learn JavaScript from scratch to advanced level. This comprehensive course covers everything from basic syntax to advanced concepts like closures, prototypes, and asynchronous programming. You'll build real-world projects and gain hands-on experience with modern JavaScript development.</p>
+        </div>
+
+        <div class="course-curriculum">
+            <h2 class="curriculum-title">Course Curriculum</h2>
+            <div class="curriculum-item">
+                <div class="lesson-title">
+                    <i class="fas fa-play-circle"></i>
+                    Introduction to JavaScript
+                </div>
+                <span class="lesson-duration">45 min</span>
+            </div>
+            <div class="curriculum-item">
+                <div class="lesson-title">
+                    <i class="fas fa-play-circle"></i>
+                    Variables and Data Types
+                </div>
+                <span class="lesson-duration">1 hour</span>
+            </div>
+            <div class="curriculum-item">
+                <div class="lesson-title">
+                    <i class="fas fa-play-circle"></i>
+                    Functions and Scope
+                </div>
+                <span class="lesson-duration">1.5 hours</span>
+            </div>
+            <div class="curriculum-item">
+                <div class="lesson-title">
+                    <i class="fas fa-play-circle"></i>
+                    Objects and Arrays
+                </div>
+                <span class="lesson-duration">2 hours</span>
+            </div>
+            <div class="curriculum-item">
+                <div class="lesson-title">
+                    <i class="fas fa-play-circle"></i>
+                    DOM Manipulation
+                </div>
+                <span class="lesson-duration">2.5 hours</span>
+            </div>
+            <div class="curriculum-item">
+                <div class="lesson-title">
+                    <i class="fas fa-play-circle"></i>
+                    Asynchronous JavaScript
+                </div>
+                <span class="lesson-duration">3 hours</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get course ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get('id');
+
+        // Function to load course details
+        function loadCourseDetails() {
+            // In a real application, you would fetch course details from an API
+            // For now, we'll use the course ID to determine which course to display
+            console.log('Loading course details for ID:', courseId);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', loadCourseDetails);
+    </script>
+</body>
+</html> 

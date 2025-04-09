@@ -1,24 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>  
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> Learning World </title>
     <link rel="stylesheet" href="style.css" />    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+      /* Navbar Styles */
+      .navbar {
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        width: 100%;
+        max-width: 1200px;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .logo {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+        margin-bottom: 2rem;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        list-style: none;
+        width: 100%;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-align: center;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-links .nav__btn {
+        background: white;
+        color: #4f46e5;
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+      }
+
+      .nav-links .nav__btn:hover {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .hamburger {
+        display: none;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+        z-index: 1001;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .navbar {
+          height: auto;
+          min-height: 100vh;
+        }
+
+        .nav-container {
+          padding: 1rem;
+        }
+
+        .logo {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        .nav-links {
+          gap: 1rem;
+        }
+
+        .nav-links a {
+          font-size: 1.1rem;
+          padding: 0.5rem;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .nav-links.active {
+          display: flex;
+        }
+      }
+    </style>
   </head>
+
   <body>
-    <nav>
-      <div class="nav__logo"><a href="#">Learning World</a></div>
-      <ul class="nav__links">
-        <li class="link"><a href="index.html">Home</a></li>
-        <li class="link"><a href="about.html">About Us</a></li>
-        <li class="link"><a href="service.html">Services</a></li>
-        <li class="link"><a href="course.html">Courses</a></li>
-        <li class="link"><a href="blog.html">Blog</a></li>
-        <li class="link"><a href="login_signup.html" class="nav__btn">Register</a></li>
-    </ul>
+    <nav class="navbar">
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-container">
+        <a href="#" class="logo">Learning World</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#services-section">Services</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="#blog-section">Blog</a></li>
+          <li><a href="login_signup.html" class="nav__btn">Register</a></li>
+          <li><a href="admin_login.html" class="nav__btn">Admin Login</a></li>
+        </ul>
+      </div>
     </nav>
+
     <section class="container">
       <div class="content__container">
         <h1>
@@ -48,5 +179,306 @@
         </div>
       </div>
     </section>
+
+  <!-- Services Section -->
+  <section id="services-section" class="services-section">
+    <h2>Our Services</h2>
+    <div class="services-container">
+      <div class="service-card">
+        <div class="service-icon">📚</div>
+        <h3>Online Courses</h3>
+        <p>Access high-quality courses from expert instructors in various fields.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Certification</h3>
+        <p>Earn recognized certificates upon course completion.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">👨‍🏫</div>
+        <h3>Expert Teachers</h3>
+        <p>Learn from industry professionals and experienced educators.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💬</div>
+        <h3>Community Support</h3>
+        <p>Join a vibrant community of learners and get support when needed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Section -->
+  <section id="blog-section" class="blog-section">
+    <div class="section-title">
+      <h2>Latest from Our Blog</h2>
+      <p>Stay updated with our latest insights and educational content</p>
+    </div>
+    <div class="blog-slider">
+      <div class="blog-slider-container">
+        <div class="blog-slide">
+          <div class="blog-card">
+            <div class="blog-image">
+              <img src="images/blogimages/blog1.jpg" alt="Blog 1">
+              <div class="blog-date">
+                <span class="day">15</span>
+                <span class="month">Mar</span>
+              </div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-category">Online Learning</div>
+              <h3>Tips for Effective Online Learning</h3>
+              <p>Discover strategies to make the most of your online learning experience and achieve better results.</p>
+              <div class="blog-meta">
+                <span><i class="fas fa-user"></i> By Admin</span>
+                <span><i class="fas fa-comments"></i> 5 Comments</span>
+              </div>
+              <a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-slide">
+          <div class="blog-card">
+            <div class="blog-image">
+              <img src="images/blogimages/blog2.jpg" alt="Blog 2">
+              <div class="blog-date">
+                <span class="day">10</span>
+                <span class="month">Mar</span>
+              </div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-category">Education</div>
+              <h3>Future of Education</h3>
+              <p>Explore how technology is shaping the future of education and transforming learning experiences.</p>
+              <div class="blog-meta">
+                <span><i class="fas fa-user"></i> By Admin</span>
+                <span><i class="fas fa-comments"></i> 8 Comments</span>
+              </div>
+              <a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="blog-slide">
+          <div class="blog-card">
+            <div class="blog-image">
+              <img src="images/blogimages/blog3.jpg" alt="Blog 3">
+              <div class="blog-date">
+                <span class="day">05</span>
+                <span class="month">Mar</span>
+              </div>
+            </div>
+            <div class="blog-content">
+              <div class="blog-category">Career</div>
+              <h3>Career Development</h3>
+              <p>Learn how online courses can boost your career prospects and help you achieve professional growth.</p>
+              <div class="blog-meta">
+                <span><i class="fas fa-user"></i> By Admin</span>
+                <span><i class="fas fa-comments"></i> 12 Comments</span>
+              </div>
+              <a href="blog.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+      <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section class="contact-section">
+    <h2>Contact Us</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <p>123 Education Street, Learning City, 12345</p>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <p>info@learningworld.com</p>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <p>+1 (123) 456-7890</p>
+        </div>
+      </div>
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Certificate Section -->
+  <section class="certifications-section">
+    <div class="section-title">
+      <h1>Our Certifications</h1>
+      <p>Recognized credentials that validate your skills and knowledge</p>
+    </div>
+
+    <div class="certifications-container">
+      <!-- Certification 1 -->
+      <div class="certification-card">
+        <img
+          src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+          alt="Full Stack Development Certificate" class="certificate-img">
+        <div class="certificate-content">
+          <h3>Full Stack Development</h3>
+          <p>Master both front-end and back-end technologies with our comprehensive program. Build complete web
+            applications using modern frameworks and tools.</p>
+          <a href="#" class="view-btn">View Details</a>
+        </div>
+      </div>
+
+      <!-- Certification 2 -->
+      <div class="certification-card">
+        <img
+          src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+          alt="Data Science Certificate" class="certificate-img">
+        <div class="certificate-content">
+          <h3>Data Science Professional</h3>
+          <p>Learn data analysis, machine learning, and statistical modeling. Work with real-world datasets and gain
+            hands-on experience with industry tools.</p>
+          <a href="#" class="view-btn">View Details</a>
+        </div>
+      </div>
+
+      <!-- Certification 3 -->
+      <div class="certification-card">
+        <img
+          src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
+          alt="Cloud Computing Certificate" class="certificate-img">
+        <div class="certificate-content">
+          <h3>Cloud Computing Specialist</h3>
+          <p>Master cloud platforms like AWS, Azure, and Google Cloud. Learn to deploy, manage, and scale applications
+            in cloud environments.</p>
+          <a href="#" class="view-btn">View Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Learning World</h3>
+        <p>Empowering learners worldwide through quality education.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
+          <li><a href="course.html"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+          <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
+          <li><a href="#"><i class="fas fa-headset"></i> Help Center</a></li>
+          <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+          <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Subscribe to our newsletter for the latest updates.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your Email" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Learning World. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slider = document.querySelector('.blog-slider-container');
+      const prevBtn = document.querySelector('.slider-btn.prev');
+      const nextBtn = document.querySelector('.slider-btn.next');
+      const slides = document.querySelectorAll('.blog-slide');
+      const slideWidth = slides[0].offsetWidth + 30; // Width + gap
+      let currentPosition = 0;
+
+      function updateButtons() {
+        prevBtn.style.display = currentPosition === 0 ? 'none' : 'flex';
+        nextBtn.style.display = currentPosition <= -(slideWidth * (slides.length - 1)) ? 'none' : 'flex';
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentPosition < 0) {
+          currentPosition += slideWidth;
+          slider.style.transform = `translateX(${currentPosition}px)`;
+          updateButtons();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentPosition > -(slideWidth * (slides.length - 1))) {
+          currentPosition -= slideWidth;
+          slider.style.transform = `translateX(${currentPosition}px)`;
+          updateButtons();
+        }
+      });
+
+      // Initialize buttons
+      updateButtons();
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        const newSlideWidth = slides[0].offsetWidth + 30;
+        if (newSlideWidth !== slideWidth) {
+          currentPosition = 0;
+          slider.style.transform = 'translateX(0)';
+          updateButtons();
+        }
+      });
+    });
+
+    // Navbar Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close mobile menu after clicking
+          navLinks.classList.remove('active');
+        }
+      });
+    });
+  </script>
   </body>
+
 </html>
