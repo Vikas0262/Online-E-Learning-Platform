@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
+
+
 /* Credit - youtube.com/@ashutoshpython */
 :root {
   --primary-color: #5c48ee;
@@ -7,12 +9,15 @@
   --secondary-color: #f9fafe;
   --text-color: #333333;
   --white: #ffffff;
-  --max-width: 1100px;
+  --max-width: 1200px;
 }
 
-* {
-  padding: 0;
+html, body {
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+* {
   box-sizing: border-box;
 }
 
@@ -21,65 +26,17 @@ body {
   background-color: var(--secondary-color);
 }
 
-nav {
-  max-width: var(--max-width);
-  margin: auto;
-  padding: 0.5rem;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav__logo a {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-
-
-.nav__links {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.link a {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-color);
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.link a:hover {
-  color: var(--primary-color);
-}
-
-.link .nav__btn {
-  padding: 0.5rem 2rem;
-  color: var(--white) !important;
-  background-color: var(--primary-color);
-  border-radius: 5px;
-}
-
-.link .nav__btn:hover {
-  background-color: var(--primary-color-dark);
-}
 
 .container {
   max-width: var(--max-width);
-  margin: auto;
+  margin: 0 auto;
   padding: 1rem;
   min-height: calc(100vh - 100px);
   display: grid;
+  margin-top: 80px;
   grid-template-columns: repeat(2, 1fr);
   gap: 5rem;
+  
 }
 
 .content__container {
