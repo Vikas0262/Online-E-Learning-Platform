@@ -5,3 +5,5 @@
 /backend/logs
 /backend/temp
 /backend/uploads
+
+/backend/.env

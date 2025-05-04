@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player - Learning World</title>
+    <link rel="stylesheet" href="styles/video-player.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0f0f0f;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        .video-page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-page-header {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: #272727;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid #3f3f3f;
+        }
+
+        .back-btn:hover {
+            background-color: #3f3f3f;
+            transform: translateX(-5px);
+        }
+
+        .back-btn i {
+            margin-right: 0.5rem;
+        }
+
+        .video-page-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            background-color: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #player {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .video-info {
+            background-color: #1a1a1a;
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 1.5rem 0;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(255, 0, 0, 0.2);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .video-description {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border-left: 4px solid #ff0000;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #aaa;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .meta-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .meta-item i {
+            color: #ff0000;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .meta-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .meta-item span {
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .video-page-container {
+                padding: 0.5rem;
+            }
+
+            .video-info {
+                padding: 1.5rem;
+                margin-top: 1rem;
+            }
+
+            .video-title {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+                padding-bottom: 1rem;
+            }
+
+            .video-description {
+                font-size: 1rem;
+                padding: 0.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .video-meta {
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1.5rem;
+                padding-top: 1.5rem;
+            }
+
+            .meta-item {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-page-container">
+        <div class="video-page-header">
+            <a href="javascript:history.back()" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Courses
+            </a>
+        </div>
+        <div class="video-page-content">
+            <div class="video-wrapper">
+                <div id="player"></div>
+            </div>
+            <div class="video-info">
+                <h1 class="video-title" id="videoTitle"></h1>
+                <p class="video-description" id="videoDescription"></p>
+                <div class="video-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duration: 10:00</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-eye"></i>
+                        <span>1.2K views</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>245 likes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        
+        function onYouTubeIframeAPIReady() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoUrl = urlParams.get('video');
+            const title = urlParams.get('title');
+            const description = urlParams.get('description');
+
+            if (videoUrl && title && description) {
+                document.title = `${title} - Learning World`;
+                document.getElementById('videoTitle').textContent = title;
+                document.getElementById('videoDescription').textContent = description;
+
+                // Extract video ID from the embed URL
+                const videoId = videoUrl.split('/').pop().split('?')[0];
+                
+                // Create YouTube player
+                player = new YT.Player('player', {
+                    height: '100%',
+                    width: '100%',
+                    videoId: videoId,
+                    playerVars: {
+                        'autoplay': 1,
+                        'mute': 0,
+                        'rel': 0,
+                        'modestbranding': 1,
+                        'playsinline': 1,
+                        'controls': 1,
+                        'theme': 'dark'
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            } else {
+                window.location.href = 'courses.html';
+            }
+        }
+
+        function onPlayerReady(event) {
+            // Unmute and play the video
+            event.target.unMute();
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            // Handle video state changes if needed
+            if (event.data === YT.PlayerState.ENDED) {
+                // Video ended
+            }
+        }
+    </script>
+</body>
+</html> 

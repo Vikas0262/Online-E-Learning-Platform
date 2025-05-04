@@ -6,10 +6,135 @@
     <title>Our Courses - Learning World</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="courses.css">
-    
+    <style>
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-menu a {
+            color: #1e293b;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: #5c48ee;
+        }
+
+        .mobile-menu .admin-login-btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-buttons {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* Active link styles */
+        .nav-links a.active {
+            color: #ff0000 !important;
+            font-weight: 600;
+        }
+
+        .mobile-menu a.active {
+            color: #ff0000 !important;
+            font-weight: 600;
+        }
+
+        /* Add margin to prevent content from being hidden behind navbar */
+        .courses-container {
+            margin-top: 80px; /* Adjust this value based on your navbar height */
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+    </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Learning World</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#services-section">Services</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="index.html#blog-section">Blog</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
+                <button class="register-btn" onclick="window.location.href='login_signup.html'">Register</button>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-user-plus register" onclick="handleRegisterClick(event)"></i>
+                <i class="fas fa-bars" id="hamburgerIcon"></i>
+            </div>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#services-section">Services</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="index.html#blog-section">Blog</a></li>
+                <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
+            </ul>
+            <div class="nav-buttons">
+                <!-- <button class="register-btn">Register</button> -->
+            </div>
+        </div>
+    </nav>
+
     <div class="courses-container">
         <header class="page-header">
             <h1>Explore Our Courses</h1>
@@ -24,6 +149,52 @@
         </div>
     </div>
 
-   <script src="courses.js"></script>
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+
+        // Set active class for current page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-links a');
+            const mobileLinks = document.querySelectorAll('.mobile-menu a');
+            
+            // Set active class for Courses link since we're on courses.html
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === 'courses.html') {
+                    link.classList.add('active');
+                }
+            });
+            
+            mobileLinks.forEach(link => {
+                if (link.getAttribute('href') === 'courses.html') {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        hamburgerIcon.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Handle register icon click
+        function handleRegisterClick(event) {
+            event.preventDefault();
+            hamburgerIcon.click();
+            setTimeout(() => {
+                window.location.href = 'login_signup.html';
+            }, 300);
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+    </script>
+    <script src="courses.js"></script>
 </body>
 </html> 
