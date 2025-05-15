@@ -1,0 +1,9 @@
+/node_modules
+/backend/dist
+/backend/build
+/backend/coverage
+/backend/logs
+/backend/temp
+/backend/uploads
+
+/backend/.env

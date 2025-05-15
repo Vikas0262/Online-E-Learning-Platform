@@ -1,0 +1,89 @@
+.messages-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-top: 1.5rem;
+}
+
+.messages-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.messages-table th,
+.messages-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.messages-table th {
+    background-color: var(--light-bg);
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.messages-table tr:hover {
+    background-color: var(--light-bg);
+}
+
+.message-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-select {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    background-color: white;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-unread {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+}
+
+.status-read {
+    background-color: #f0fff4;
+    color: #2f855a;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.view-btn {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+}
+
+.delete-btn {
+    background-color: #fff5f5;
+    color: #c53030;
+} 

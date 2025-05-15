@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Video Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4299e1;
+            --secondary-color: #2d3748;
+            --background-color: #1a202c;
+            --text-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .player-wrapper {
+            position: relative;
+            width: 100%;
+            background: black;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .course-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .course-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .course-description {
+            color: #cbd5e0;
+            line-height: 1.6;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
+        }
+
+        .error-message {
+            display: none;
+            background: #fc8181;
+            color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .video-container {
+                padding: 1rem;
+            }
+
+            .course-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <div class="header">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i>
+                Back to Course
+            </a>
+        </div>
+
+        <div id="errorMessage" class="error-message">
+            Unable to load video. Please try again later.
+        </div>
+
+        <div class="player-wrapper">
+            <div id="player" class="video-player"></div>
+        </div>
+
+        <div class="course-info">
+            <h1 class="course-title" id="courseTitle">Loading...</h1>
+            <p class="course-description" id="courseDescription">Loading course details...</p>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        let player;
+        let attempts = 0;
+        const maxAttempts = 3;
+
+        // Function to extract video ID from URL
+        function getYouTubeVideoId(url) {
+            if (!url) return null;
+            
+            // Handle different YouTube URL formats
+            const patterns = [
+                /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\?\/]+)/,
+                /^([^&\?\/]+)$/
+            ];
+
+            for (let pattern of patterns) {
+                const match = url.match(pattern);
+                if (match && match[1]) {
+                    return match[1];
+                }
+            }
+
+            return null;
+        }
+
+        // Function to show error message
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        // Function to hide loading overlay
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        // Function to initialize the player
+        function initializePlayer(videoId) {
+            if (!videoId) {
+                showError('Invalid video URL');
+                hideLoading();
+                return;
+            }
+
+            try {
+                player = new YT.Player('player', {
+                    height: '100%',
+                    width: '100%',
+                    videoId: videoId,
+                    playerVars: {
+                        'autoplay': 1,
+                        'rel': 0,
+                        'modestbranding': 1,
+                        'playsinline': 1,
+                        'controls': 1
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onError': onPlayerError,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+            } catch (error) {
+                console.error('Error initializing player:', error);
+                showError('Error initializing video player');
+                hideLoading();
+            }
+        }
+
+        // Handle player ready event
+        function onPlayerReady(event) {
+            hideLoading();
+            event.target.playVideo();
+        }
+
+        // Handle player errors
+        function onPlayerError(event) {
+            console.error('Player error:', event.data);
+            attempts++;
+            
+            if (attempts < maxAttempts) {
+                // Retry initialization
+                setTimeout(() => {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const videoUrl = urlParams.get('video');
+                    const videoId = getYouTubeVideoId(videoUrl);
+                    initializePlayer(videoId);
+                }, 2000);
+            } else {
+                showError('Unable to load video. Please try again later.');
+                hideLoading();
+            }
+        }
+
+        // Handle player state changes
+        function onPlayerStateChange(event) {
+            // Save progress when video ends
+            if (event.data === YT.PlayerState.ENDED) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const courseTitle = urlParams.get('title');
+                
+                // Save progress in localStorage
+                const progress = JSON.parse(localStorage.getItem('courseProgress') || '{}');
+                progress[courseTitle] = 100; // 100% complete
+                localStorage.setItem('courseProgress', JSON.stringify(progress));
+            }
+        }
+
+        // Initialize when YouTube API is ready
+        function onYouTubeIframeAPIReady() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoUrl = urlParams.get('video');
+            const title = urlParams.get('title');
+            const description = urlParams.get('description');
+
+            // Update page content
+            document.title = `${title || 'Course Video'} - Learning Platform`;
+            document.getElementById('courseTitle').textContent = title || 'Course Video';
+            document.getElementById('courseDescription').textContent = description || '';
+
+            // Initialize player with video ID
+            const videoId = getYouTubeVideoId(videoUrl);
+            initializePlayer(videoId);
+        }
+
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && player && player.pauseVideo) {
+                player.pauseVideo();
+            }
+        });
+    </script>
+</body>
+</html> 

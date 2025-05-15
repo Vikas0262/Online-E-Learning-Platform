@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4299e1;
+            --secondary-color: #2d3748;
+            --accent-color: #48bb78;
+            --background-color: #f7fafc;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-color: #e2e8f0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .confirmation-container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .confirmation-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .confirmation-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .confirmation-subtitle {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .confirmation-content {
+            padding: 2rem;
+        }
+
+        .order-details {
+            background: var(--background-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .next-steps {
+            background: #ebf8ff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .next-steps h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .steps-list {
+            list-style: none;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .step-item i {
+            color: var(--primary-color);
+            margin-top: 0.2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .primary-button {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .primary-button:hover {
+            background: #3182ce;
+            transform: translateY(-2px);
+        }
+
+        .secondary-button {
+            background: var(--background-color);
+            color: var(--secondary-color);
+        }
+
+        .secondary-button:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .confirmation-container {
+                margin: 1rem;
+                border-radius: 12px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .confirmation-header {
+                padding: 1.5rem;
+            }
+
+            .confirmation-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-header">
+            <i class="fas fa-graduation-cap success-icon"></i>
+            <h1 class="confirmation-title">Enrollment Successful!</h1>
+            <p class="confirmation-subtitle">Welcome to your learning journey</p>
+        </div>
+
+        <div class="confirmation-content">
+            <div class="order-details">
+                <div class="detail-row">
+                    <span class="detail-label">Course</span>
+                    <span class="detail-value" id="courseName"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Enrollment ID</span>
+                    <span class="detail-value" id="orderId"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Enrolled On</span>
+                    <span class="detail-value" id="orderDate"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Course Fee</span>
+                    <span class="detail-value" id="amountPaid"></span>
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <h3><i class="fas fa-list-check"></i> Get Started</h3>
+                <ul class="steps-list">
+                    <li class="step-item">
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Access your course content immediately in your dashboard</span>
+                    </li>
+                    <li class="step-item">
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Download your course materials and resources</span>
+                    </li>
+                    <li class="step-item">
+                        <i class="fas fa-arrow-right"></i>
+                        <span>Begin your first lesson and track your progress</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="action-buttons">
+                <a href="javascript:void(0)" onclick="startCourse()" class="action-button primary-button">
+                    <i class="fas fa-play-circle"></i>
+                    Begin Course
+                </a>
+                <a href="courses.html" class="action-button secondary-button">
+                    <i class="fas fa-book"></i>
+                    Explore More Courses
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateOrderId() {
+            return 'ORD-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function formatDate(date) {
+            return new Intl.DateTimeFormat('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }).format(date);
+        }
+
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                title: params.get('title'),
+                price: params.get('price'),
+                videoUrl: params.get('videoUrl')
+            };
+        }
+
+        function startCourse() {
+            const params = getUrlParams();
+            if (params.videoUrl) {
+                window.location.href = `video-player.html?video=${encodeURIComponent(params.videoUrl)}&title=${encodeURIComponent(params.title)}&description=Start learning ${encodeURIComponent(params.title)}`;
+            } else {
+                window.location.href = 'dashboard.html';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const params = getUrlParams();
+            const now = new Date();
+
+            document.getElementById('courseName').textContent = decodeURIComponent(params.title || 'Course Name');
+            document.getElementById('orderId').textContent = generateOrderId();
+            document.getElementById('orderDate').textContent = formatDate(now);
+            document.getElementById('amountPaid').textContent = decodeURIComponent(params.price || '₹0');
+
+            // Save enrollment to backend
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    const response = await fetch('http://localhost:5000/api/auth/enroll', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify({
+                            title: params.title,
+                            orderId: document.getElementById('orderId').textContent,
+                            price: params.price,
+                            videoUrl: params.videoUrl
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        localStorage.setItem('enrolledCourses', JSON.stringify(data.enrolledCourses));
+                    } else {
+                        console.error('Failed to save enrollment to backend');
+                    }
+                } catch (error) {
+                    console.error('Error saving enrollment:', error);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

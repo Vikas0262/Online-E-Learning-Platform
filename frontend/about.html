@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Learning World</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    /* About Page Specific Styles */
+    .about-hero {
+      background: linear-gradient(135deg, #5c48ee 0%, #0f1e6a 100%);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .about-hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+
+    .about-hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    .mission-vision {
+      padding: 80px 0;
+      background-color: #f8f9fa;
+    }
+
+    .mission-vision-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 50px;
+      padding: 0 20px;
+    }
+
+    .mission-card, .vision-card {
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .mission-card h2, .vision-card h2 {
+      font-size: 2rem;
+      color: #2d3748;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .mission-card h2 i, .vision-card h2 i {
+      color: #5c48ee;
+    }
+
+    .mission-card p, .vision-card p {
+      color: #4a5568;
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+
+    .team-section {
+      padding: 80px 0;
+      background-color: white;
+    }
+
+    .team-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: #2d3748;
+    }
+
+    .team-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .team-member {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+
+    .team-member img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .team-member-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .team-member-info h3 {
+      font-size: 1.5rem;
+      color: #2d3748;
+      margin-bottom: 5px;
+    }
+
+    .team-member-info p {
+      color: #4a5568;
+      margin-bottom: 15px;
+    }
+
+    .team-member-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .team-member-social a {
+      color: #5c48ee;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .team-member-social a:hover {
+      color: #0f1e6a;
+    }
+
+    .values-section {
+      padding: 80px 0;
+      background-color: #f8f9fa;
+    }
+
+    .values-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 50px;
+      color: #2d3748;
+    }
+
+    .values-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .value-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .value-card i {
+      font-size: 2.5rem;
+      color: #5c48ee;
+      margin-bottom: 20px;
+    }
+
+    .value-card h3 {
+      font-size: 1.5rem;
+      color: #2d3748;
+      margin-bottom: 15px;
+    }
+
+    .value-card p {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .mission-vision-container {
+        grid-template-columns: 1fr;
+      }
+
+      .about-hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Mobile Menu Styles */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-menu li {
+      margin-bottom: 1rem;
+    }
+
+    .mobile-menu a {
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: 500;
+      display: block;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: #5c48ee;
+    }
+
+    .mobile-menu .admin-login-btn {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .nav-buttons {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* Active link styles */
+    .nav-links a.active {
+      color: #ff0000 !important;
+      font-weight: 600;
+    }
+
+    .mobile-menu a.active {
+      color: #ff0000 !important;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">Learning World</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class='active'>About</a></li>
+        <li><a href="index.html#services-section">Services</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="index.html#blog-section">Blog</a></li>
+      </ul>
+      <div class="nav-buttons">
+        <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
+        <button class="register-btn" onclick="window.location.href='login_signup.html'">Register</button>
+      </div>
+      <div class="hamburger">
+        <i class="fas fa-user-plus register" onclick="handleRegisterClick(event)"></i>
+        <i class="fas fa-bars" id="hamburgerIcon"></i>
+      </div>
+    </div>
+    <div class="mobile-menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#services-section">Services</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="index.html#blog-section">Blog</a></li>
+        <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
+      </ul>
+      <div class="nav-buttons">
+        <!-- <button class="register-btn">Register</button> -->
+      </div>
+    </div>
+  </nav>
+
+  <section class="about-hero">
+    <h1>About Learning World</h1>
+    <p>Empowering learners worldwide through innovative education solutions and cutting-edge technology.</p>
+  </section>
+
+  <section class="mission-vision">
+    <div class="mission-vision-container">
+      <div class="mission-card">
+        <h2><i class="fas fa-bullseye"></i> Our Mission</h2>
+        <p>To provide accessible, high-quality education to learners worldwide through innovative technology and expert instruction. We strive to break down barriers to education and create opportunities for lifelong learning.</p>
+      </div>
+      <div class="vision-card">
+        <h2><i class="fas fa-eye"></i> Our Vision</h2>
+        <p>To become the world's leading online education platform, transforming how people learn and grow. We envision a future where quality education is accessible to everyone, everywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-container">
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Member">
+        <div class="team-member-info">
+          <h3>John Smith</h3>
+          <p>Founder & CEO</p>
+          <div class="team-member-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Member">
+        <div class="team-member-info">
+          <h3>Sarah Johnson</h3>
+          <p>Head of Education</p>
+          <div class="team-member-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Member">
+        <div class="team-member-info">
+          <h3>Michael Chen</h3>
+          <p>Technical Director</p>
+          <div class="team-member-social">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values-section">
+    <h2>Our Core Values</h2>
+    <div class="values-container">
+      <div class="value-card">
+        <i class="fas fa-graduation-cap"></i>
+        <h3>Excellence</h3>
+        <p>We are committed to delivering the highest quality education and learning experiences.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-users"></i>
+        <h3>Community</h3>
+        <p>We believe in the power of learning together and supporting each other's growth.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Innovation</h3>
+        <p>We constantly explore new ways to make learning more effective and engaging.</p>
+      </div>
+      <div class="value-card">
+        <i class="fas fa-globe"></i>
+        <h3>Accessibility</h3>
+        <p>We strive to make quality education available to everyone, everywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>Learning World</h3>
+        <p>Empowering learners worldwide through quality education.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+          <li><a href="service.html"><i class="fas fa-cogs"></i> Services</a></li>
+          <li><a href="course.html"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+          <li><a href="blog.html"><i class="fas fa-blog"></i> Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
+          <li><a href="#"><i class="fas fa-headset"></i> Help Center</a></li>
+          <li><a href="#"><i class="fas fa-file-contract"></i> Terms of Service</a></li>
+          <li><a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Subscribe to our newsletter for the latest updates.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your Email" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Learning World. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Hamburger menu functionality
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const hamburgerIcon = document.getElementById('hamburgerIcon');
+
+    // Set active class for current page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get all navigation links
+      const navLinks = document.querySelectorAll('.nav-links a');
+      const mobileLinks = document.querySelectorAll('.mobile-menu a');
+      
+      // Set active class for About link since we're on about.html
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === '#') {
+          link.classList.add('active');
+        }
+      });
+      
+      mobileLinks.forEach(link => {
+        if (link.getAttribute('href') === '#about') {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    hamburgerIcon.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Handle register icon click
+    function handleRegisterClick(event) {
+      event.preventDefault();
+      hamburgerIcon.click();
+      setTimeout(() => {
+        window.location.href = 'login_signup.html';
+      }, 300);
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+  </script>
+  <script src="js/auth.js"></script>
+</body>
+</html> 

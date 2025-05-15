@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up - E-Learning Platform</title>
+  <link rel="stylesheet" href="login_signup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <h2><i class="fas fa-user-plus"></i> Sign Up</h2>
+    <div class="error-message" id="errorMessage"></div>
+    <div class="success-message" id="successMessage"></div>
+    <form id="signupForm">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input type="text" id="signupName" placeholder="Full Name" required />
+      </div>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="signupEmail" placeholder="Email" required />
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="signupPassword" placeholder="Password" required />
+      </div>
+      <button type="submit" id="signupBtn">
+        <i class="fas fa-user-plus"></i> Sign Up
+      </button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    const signupForm = document.getElementById('signupForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const signupBtn = document.getElementById('signupBtn');
+
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('signupName').value;
+      const email = document.getElementById('signupEmail').value;
+      const password = document.getElementById('signupPassword').value;
+
+      // Show loading state
+      signupBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+      signupBtn.classList.add('loading');
+      signupBtn.disabled = true;
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Show success message
+          successMessage.textContent = 'Account created successfully! Redirecting to login...';
+          successMessage.style.display = 'block';
+          
+          // Redirect to login page
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1500);
+        } else {
+          throw new Error(data.msg || 'Signup failed');
+        }
+      } catch (error) {
+        errorMessage.textContent = error.message;
+        errorMessage.style.display = 'block';
+        errorMessage.classList.add('shake');
+        
+        // Remove shake animation after it completes
+        setTimeout(() => {
+          errorMessage.classList.remove('shake');
+        }, 500);
+      } finally {
+        // Reset button state
+        signupBtn.innerHTML = '<i class="fas fa-user-plus"></i> Sign Up';
+        signupBtn.classList.remove('loading');
+        signupBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Learning World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        /* Blog Page Specific Styles */
+        .blog-container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 2rem;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-header h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .blog-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+		cursor:pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #e2e8f0;
+            color: #4a5568;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #718096;
+            font-size: 0.875rem;
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .author-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .blog-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            color: #4299e1;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #2b6cb0;
+        }
+
+        @media (max-width: 768px) {
+            .blog-container {
+                padding: 1rem;
+            }
+
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Learning World</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#services-section">Services</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
+                <button class="register-btn" onclick="window.location.href='login_signup.html'">Register</button>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-user-plus register" onclick="handleRegisterClick(event)"></i>
+                <i class="fas fa-bars" id="hamburgerIcon"></i>
+            </div>
+        </div>
+        <div class="mobile-menu">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#services-section">Services</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="blog-container">
+        <header class="blog-header">
+            <h1>Latest from Our Blog</h1>
+            <p>Discover insights, tips, and updates from our education experts</p>
+        </header>
+
+        <div class="blog-grid">
+            <!-- Blog Card 1 -->
+            <article class="blog-card" onclick="navigateToBlogPreview({
+                title: 'The Future of Education: Embracing Digital Learning',
+                category: 'Online Learning',
+                author: 'John Smith',
+                authorImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80',
+                date: 'Mar 15, 2024',
+                image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                content: encodeURIComponent(`
+                    <p>Explore how digital transformation is reshaping education and creating new opportunities for learners worldwide. The rapid advancement of technology has revolutionized the way we learn, making education more accessible and engaging than ever before.</p>
+                    
+                    <h2>The Rise of Digital Learning</h2>
+                    <p>Digital learning platforms have become increasingly popular, offering flexible learning options that cater to diverse learning styles and schedules. This transformation has been accelerated by recent global events, pushing educational institutions to adapt and innovate.</p>
+                    
+                    <h2>Key Benefits of Digital Learning</h2>
+                    <ul>
+                        <li>Flexibility in learning pace and schedule</li>
+                        <li>Access to diverse learning resources</li>
+                        <li>Interactive and engaging content</li>
+                        <li>Real-time feedback and assessment</li>
+                        <li>Global connectivity and collaboration</li>
+                    </ul>
+                    
+                    <p>As we continue to embrace digital learning, it's essential to understand its impact on traditional education systems and how we can leverage technology to create more effective learning experiences.</p>
+                `)
+            })">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Online Learning" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">Online Learning</span>
+                    <h2 class="blog-title">The Future of Education: Embracing Digital Learning</h2>
+                    <p class="blog-excerpt">Explore how digital transformation is reshaping education and creating new opportunities for learners worldwide.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Author" class="author-avatar">
+                            <span>John Smith</span>
+                        </div>
+                        <div class="blog-date">
+                            <i class="far fa-calendar"></i>
+                            <span>Mar 15, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Card 2 -->
+            <article class="blog-card" onclick="navigateToBlogPreview({
+                title: 'Essential Programming Skills for 2024',
+                category: 'Programming',
+                author: 'Sarah Johnson',
+                authorImage: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80',
+                date: 'Mar 12, 2024',
+                image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80',
+                content: encodeURIComponent(`
+                    <p>The tech industry is constantly evolving, and staying up-to-date with the latest programming skills is crucial for success in 2024. Here's a comprehensive guide to the most in-demand programming skills that will shape the future of software development.</p>
+                    
+                    <h2>Top Programming Languages</h2>
+                    <p>As we move further into 2024, certain programming languages have emerged as clear leaders in the industry. Understanding these languages and their applications is essential for any aspiring developer.</p>
+                    
+                    <h2>Must-Have Skills for Developers</h2>
+                    <ul>
+                        <li>Cloud Computing and DevOps</li>
+                        <li>Artificial Intelligence and Machine Learning</li>
+                        <li>Web Development Frameworks</li>
+                        <li>Mobile App Development</li>
+                        <li>Cybersecurity Best Practices</li>
+                    </ul>
+                    
+                    <p>Beyond just coding, modern developers need to understand the broader technology ecosystem and how different components work together to create robust solutions.</p>
+                `)
+            })">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Coding" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">Programming</span>
+                    <h2 class="blog-title">Essential Programming Skills for 2024</h2>
+                    <p class="blog-excerpt">Discover the most in-demand programming skills and technologies that will shape the future of software development.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Author" class="author-avatar">
+                            <span>Sarah Johnson</span>
+                        </div>
+                        <div class="blog-date">
+                            <i class="far fa-calendar"></i>
+                            <span>Mar 12, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Card 3 -->
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Team Learning" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">Collaboration</span>
+                    <h2 class="blog-title">The Power of Collaborative Learning</h2>
+                    <p class="blog-excerpt">Learn how group projects and peer learning can enhance your educational experience and develop essential soft skills.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Author" class="author-avatar">
+                            <span>Michael Chen</span>
+                        </div>
+                        <div class="blog-date">
+                            <i class="far fa-calendar"></i>
+                            <span>Mar 10, 2024</span>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a> -->
+                </div>
+            </article>
+
+            <!-- Blog Card 4 -->
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Career Development" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">Career</span>
+                    <h2 class="blog-title">Building a Successful Tech Career in 2024</h2>
+                    <p class="blog-excerpt">Expert advice on navigating the tech industry and building a rewarding career in the digital age.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Author" class="author-avatar">
+                            <span>Emily Davis</span>
+                        </div>
+                        <div class="blog-date">
+                            <i class="far fa-calendar"></i>
+                            <span>Mar 8, 2024</span>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a> -->
+                </div>
+            </article>
+
+            <!-- Blog Card 5 -->
+            <article class="blog-card">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Learning Tools" class="blog-image">
+                <div class="blog-content">
+                    <span class="blog-category">Tools</span>
+                    <h2 class="blog-title">Top Learning Tools for Developers in 2024</h2>
+                    <p class="blog-excerpt">A comprehensive guide to the most effective tools and resources for developers to enhance their learning journey.</p>
+                    <div class="blog-meta">
+                        <div class="blog-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Author" class="author-avatar">
+                            <span>David Wilson</span>
+                        </div>
+                        <div class="blog-date">
+                            <i class="far fa-calendar"></i>
+                            <span>Mar 5, 2024</span>
+                        </div>
+                    </div>
+                    <!-- <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a> -->
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.querySelector('.hamburger');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+
+        hamburgerIcon.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Handle register icon click
+        function handleRegisterClick(event) {
+            event.preventDefault();
+            hamburgerIcon.click();
+            setTimeout(() => {
+                window.location.href = 'login_signup.html';
+            }, 300);
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        function navigateToBlogPreview(blogData) {
+            const queryParams = new URLSearchParams(blogData).toString();
+            window.location.href = `blog-preview.html?${queryParams}`;
+        }
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html> 
