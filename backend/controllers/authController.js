@@ -55,8 +55,11 @@ exports.login = async (req, res) => {
 exports.enrollCourse = async (req, res) => {
   try {
     const { title, orderId, price, videoUrl } = req.body;
-    const userId = req.userId;
+    
+    // Get user ID from the authenticated request (set by auth middleware)
+    const userId = req.user.id;
 
+    // Find the user
     const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
@@ -65,38 +68,74 @@ exports.enrollCourse = async (req, res) => {
     // Check if course is already enrolled
     const isEnrolled = user.enrolledCourses.some(course => course.title === title);
     if (isEnrolled) {
-      return res.status(400).json({ msg: 'Course already enrolled' });
+      return res.status(400).json({ 
+        success: false,
+        msg: 'You are already enrolled in this course' 
+      });
     }
 
     // Add course to enrolled courses
-    user.enrolledCourses.push({
+    const enrollmentData = {
       title,
-      orderId,
+      orderId: orderId || `ORD-${Date.now()}`,
       date: new Date(),
-      price,
-      videoUrl
-    });
+      price: price || '0',
+      videoUrl: videoUrl || ''
+    };
 
+    user.enrolledCourses.push(enrollmentData);
     await user.save();
-    res.json({ msg: 'Course enrolled successfully', enrolledCourses: user.enrolledCourses });
+    
+    // Return the updated list of enrolled courses
+    res.json({ 
+      success: true,
+      msg: 'Course enrolled successfully', 
+      enrolledCourses: user.enrolledCourses 
+    });
   } catch (err) {
     console.error('❌ Enrollment error:', err);
-    res.status(500).json({ msg: 'Internal server error' });
+    res.status(500).json({ 
+      success: false,
+      msg: 'Internal server error' 
+    });
   }
 };
 
 exports.getEnrolledCourses = async (req, res) => {
   try {
-    const userId = req.userId;
-    const user = await User.findById(userId);
+    // Get user ID from the authenticated request (set by auth middleware)
+    const userId = req.user.id;
     
+    // Find the user and populate the enrolled courses
+    const user = await User.findById(userId).select('enrolledCourses');
     if (!user) {
-      return res.status(404).json({ msg: 'User not found' });
+      return res.status(404).json({ 
+        success: false,
+        msg: 'User not found' 
+      });
     }
-
-    res.json({ enrolledCourses: user.enrolledCourses || [] });
+    
+    // Format the response
+    const formattedCourses = user.enrolledCourses.map(course => ({
+      _id: course._id,
+      title: course.title,
+      orderId: course.orderId,
+      date: course.date,
+      price: course.price,
+      videoUrl: course.videoUrl,
+      // Add any additional fields you want to include
+    }));
+    
+    res.json({ 
+      success: true,
+      count: formattedCourses.length,
+      enrolledCourses: formattedCourses 
+    });
   } catch (err) {
     console.error('❌ Error fetching enrolled courses:', err);
-    res.status(500).json({ msg: 'Internal server error' });
+    res.status(500).json({ 
+      success: false,
+      msg: 'Internal server error' 
+    });
   }
 };

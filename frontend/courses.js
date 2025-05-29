@@ -257,7 +257,7 @@ async function fetchEnrolledCourses() {
     if (!token) return;
 
     try {
-        const response = await fetch('https://online-e-learning-platform-production.up.railway.app/api/auth/enrolled-courses', {
+        const response = await fetch('l', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

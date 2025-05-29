@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
 const contactRoutes = require('./routes/contactRoutes');
+const courseRoutes = require('./routes/courseRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,5 +25,6 @@ mongoose.connect(process.env.MONGO_URI, {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/courses', courseRoutes);
 
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
