@@ -1,3 +1,0 @@
-railway url
-
-https://online-e-learning-platform-production.up.railway.app/api/auth/login
