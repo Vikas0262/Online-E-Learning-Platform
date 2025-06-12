@@ -136,10 +136,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## ✉️ Contact
 
-For any inquiries, please reach out to [your-email@example.com](mailto:your-email@example.com)
+For any inquiries, please reach out to [vikas.v6543@gmail.com](mailto:vikas.v6543@gmail.com)
 
 ---
 
 <div align="center">
-  Made with ❤️ by Your Name
+  Made By Vikas Vishwakarma
 </div>
