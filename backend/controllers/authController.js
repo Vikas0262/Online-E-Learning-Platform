@@ -139,3 +139,29 @@ exports.getEnrolledCourses = async (req, res) => {
     });
   }
 };
+
+// Get user profile
+exports.getProfile = async (req, res) => {
+    try {
+        // The user ID is already available in req.user from the auth middleware
+        const user = await User.findById(req.user.id).select('-password');
+        
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+        
+        res.json({
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            avatar: user.avatar,
+            phone: user.phone,
+            location: user.location,
+            enrolledCourses: user.enrolledCourses || []
+        });
+    } catch (err) {
+        console.error('Profile fetch error:', err);
+        res.status(500).json({ msg: 'Server error' });
+    }
+};

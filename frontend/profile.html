@@ -486,7 +486,7 @@
             </ul>
             <div class="nav-buttons">
                 <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
-                <button class="register-btn" onclick="window.location.href='login_signup.html'">Register</button>
+                <button class="register-btn" onclick="window.location.href='signup.html'">Register</button>
             </div>
             <div class="hamburger">
                 <i class="fas fa-user-plus register" onclick="handleRegisterClick(event)"></i>
@@ -583,25 +583,76 @@
         </div>
     </div>
 
+    <!-- Add auth.js script -->
+    <script src="js/auth.js"></script>
+    
     <script>
-        // Load user profile data
-        function loadUserProfile() {
-            const user = JSON.parse(localStorage.getItem('user')) || {};
-            const name = user.name || 'John Doe';
-            
-            // Update profile header
-            document.getElementById('avatarInitial').textContent = name.charAt(0).toUpperCase();
-            document.getElementById('userName').textContent = name;
-            document.getElementById('userEmail').textContent = user.email || 'john.doe@example.com';
-            
-            // Update profile information
-            document.getElementById('fullName').textContent = name;
-            document.getElementById('email').textContent = user.email || 'john.doe@example.com';
-            document.getElementById('phone').textContent = user.phone || '+1 234 567 890';
-            document.getElementById('location').textContent = user.location || 'New York, USA';
+        // Call updateNavbar when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            updateNavbar();
+            loadUserProfile();
+        });
 
-            // Load enrolled courses
-            loadEnrolledCourses();
+        // Load user profile data
+        async function loadUserProfile() {
+            try {
+                // Get token from localStorage
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                console.log('Fetching user profile with token:', token);
+
+                // Fetch user data from the backend
+                const response = await fetch('https://online-e-learning-platform.onrender.com/api/auth/me', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': token,  // Send token without 'Bearer' prefix
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include'
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('Error response:', response.status, errorText);
+                    throw new Error('Failed to fetch user data');
+                }
+
+                const userData = await response.json();
+                console.log('User data received:', userData);
+                
+                // Update UI with user data
+                const name = userData.name || 'User';
+                const email = userData.email || '';
+                
+                // Update profile header
+                document.getElementById('avatarInitial').textContent = name.charAt(0).toUpperCase();
+                document.getElementById('userName').textContent = name;
+                document.getElementById('userEmail').textContent = email;
+                
+                // Update profile information
+                document.getElementById('fullName').textContent = name;
+                document.getElementById('email').textContent = email;
+                document.getElementById('phone').textContent = userData.phone || 'Not provided';
+                document.getElementById('location').textContent = userData.location || 'Not provided';
+
+                // Load enrolled courses if needed
+                if (typeof loadEnrolledCourses === 'function') {
+                    loadEnrolledCourses();
+                }
+                
+            } catch (error) {
+                console.error('Error loading user profile:', error);
+                alert(error.message || 'Failed to load user profile. Please try again later.');
+                
+                // Redirect to login if unauthorized
+                if (error.message.includes('401') || error.message.includes('token')) {
+                    window.location.href = 'login.html';
+                }
+            }
         }
 
         // Load enrolled courses from the server
@@ -620,7 +671,7 @@
 
                 const response = await fetch('https://online-e-learning-platform.onrender.com/api/auth/enrolled-courses', {
                     headers: {
-                        'Authorization': `Bearer ${token}`,
+                        'Authorization': token,
                         'Content-Type': 'application/json'
                     }
                 });
@@ -733,7 +784,7 @@
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': token
                     },
                     body: JSON.stringify(updatedProfile)
                 });
@@ -770,11 +821,6 @@
             // window.location.href = `course-details.html?id=${courseId}`;
         }
 
-        // Initialize profile on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadUserProfile();
-        });
-
         // Navbar Toggle
         const hamburger = document.querySelector('.hamburger');
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -791,4 +837,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

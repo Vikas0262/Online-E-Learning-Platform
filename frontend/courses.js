@@ -228,7 +228,7 @@ function redirectToPayment(courseData) {
     
     if (!token) {
         alert('Please login to enroll in this course');
-        window.location.href = 'login_signup.html';
+        window.location.href = 'signup.html';
         return;
     }
 
