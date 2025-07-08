@@ -135,7 +135,7 @@
   }
 
   .hamburger {
-    display: flex;
+    display: none; /* Hidden by default */
     align-items: center;
     cursor: pointer;
   }
@@ -231,7 +231,7 @@
     }
 
     .hamburger {
-      display: flex;
+      display: flex; /* Show on mobile */
     }
     
     /* Ensure dropdown appears above other content on mobile */
