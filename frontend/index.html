@@ -32,18 +32,21 @@
       <div class="nav-buttons">
         <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
         <button class="register-btn" onclick="window.location.href='signup.html'">Register</button>
+        <div class="profile-icon"></div>
       </div>
-      <div class="hamburger">
-        <i class="fas fa-user-plus register" onclick="handleRegisterClick(event)"></i>
-        <i class="fas fa-bars" id="hamburgerIcon"></i>
+      <div class="mobile-nav-right">
+        <div class="mobile-profile-icon"></div>
+        <div class="hamburger">
+          <i class="fas fa-bars" id="hamburgerIcon"></i>
+        </div>
       </div>
     </div>
     <div class="mobile-menu">
       <ul>
         <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#courses">Courses</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#services-section">Services</a></li>
+        <li><a href="courses.html">Courses</a></li>
         <li><a href="blog.html">Blog</a></li>
         <button class="admin-login-btn" onclick="window.location.href='admin_login.html'">Admin Login</button>
     </ul>
@@ -257,11 +260,10 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2024 Learning World. All rights reserved.</p>
+      <p>&copy; 2025 Learning World. Designed and Developed by Vikas Vishwakarma ❤️</p>
     </div>
   </footer>
   <script>
-
 
     // Navbar Toggle
     const hamburger = document.querySelector('.hamburger');
